@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+
+<button onclick="diceThrow(6)">Tira un D6</button> <br>
+<button onclick="createRPGCharacter(race)">Generar el array de stats</button> <br>
+<button onclick="getDamages(createRPGCharacter(race))">Damages</button>
+<button onclick="getDefense(createRPGCharacter(race))">Defensa</button>
+<button onclick="stats(createRPGCharacter(race))">Juntar stats</button>
+
+<script type="text/javascript">
+
+
+// Tirada inicial
+
+function diceThrow(dado) {
+
+    let tirada = Math.floor((Math.random() * dado) + 1);
+    return tirada;
+
+}
+
+
+//Seleccion de raza y atributos
+
+var race = prompt("Introduzca raza: Human, Elven, Dwarf, Mage");
+
+function createRPGCharacter(race) {
+
+    if (race == 'Human') {
+
+        var randSTR = 8 + diceThrow(6) + diceThrow(6);
+        var randSPE = 4 + diceThrow(6);
+        var randVIT = diceThrow(20);
+        var randDEX = diceThrow(20);
+        var randMAG = diceThrow(10);
+
+        let arraySTATS = [randSTR,randSPE,randVIT,randDEX,randMAG];
+        //console.log(arraySTATS);
+
+        return arraySTATS;
+
+    } else if (race == 'Elven') {
+
+        var randSTR = 6 + diceThrow(6) + diceThrow(6);
+        var randSPE = diceThrow(20);
+        var randVIT = diceThrow(12);
+        var randDEX = 3 + diceThrow(10) + diceThrow(10);;
+        var randMAG = diceThrow(20);
+
+        let arraySTATS = [randSTR,randSPE,randVIT,randDEX,randMAG];
+        //console.log(arraySTATS);
+
+        return arraySTATS;
+
+    } else if (race == 'Dwarf') {
+
+        var randSTR = 10 + diceThrow(10);
+        var randSPE = diceThrow(8) + diceThrow(8);;
+        var randVIT = 10 + diceThrow(8);
+        var randDEX = diceThrow(20);
+        var randMAG = diceThrow(8);
+
+        let arraySTATS = [randSTR,randSPE,randVIT,randDEX,randMAG];
+        //console.log(arraySTATS);
+
+        return arraySTATS;
+
+    } else if (race == 'Mage') {
+
+        var randSTR = diceThrow(6);
+        var randSPE = diceThrow(20); 
+        var randVIT = diceThrow(10);
+        var randDEX = diceThrow(20);
+        var randMAG = 12 + diceThrow(8);
+
+        let arraySTATS = [randSTR,randSPE,randVIT,randDEX,randMAG];
+        //console.log(arraySTATS);
+
+        return arraySTATS;
+
+    } else {
+
+        console.log('Tu lo que eres es un Troll');
+
+    }
+}
+
+
+//Get los damages
+
+function getDamages(arraySTATS) {
+
+    if (race == 'Human') {
+
+        let damSTR = arraySTATS[0];
+        let damDEX = arraySTATS[3];
+
+        let damages = Math.round((1.5 * damSTR) + (0.4 * damDEX));
+        //console.log(damages);
+
+        return damages;
+
+    } else if (race == 'Elven') {
+
+        let damDEX = arraySTATS[3];
+        let damMAG = arraySTATS[4];
+
+        let damages = Math.round((1.2 * damDEX) + (0.1 * damMAG));
+        //console.log(damages);
+
+        return damages;
+
+    } else if (race == 'Dwarf') {
+
+        let damSTR = arraySTATS[0];
+
+        let damages = Math.round(2 * damSTR);
+        //console.log(damages);
+
+        return damages;
+
+    } else if (race == 'Mage') {
+
+        let damDEX = arraySTATS[3];
+        let damMAG = arraySTATS[4];
+
+        let damages = Math.round((0.1 * damDEX) + (2 * damMAG));
+        //console.log(damages);
+
+        return damages;
+
+    } else {
+
+        console.log('El daño que tienes va a ser el guantazo que te voy a dar');
+
+    }
+}
+
+
+//Get las defensas
+
+function getDefense(arraySTATS) {
+
+    if (race == 'Human') {
+
+        let defVIT = arraySTATS[2];
+        let defSPE = arraySTATS[1];
+
+        let defense = Math.round(defVIT + (0.2 * defSPE));
+        //console.log(defense);
+
+        return defense;
+
+    } else if (race == 'Elven') {
+
+        let defVIT = arraySTATS[2];
+        let defSPE = arraySTATS[1];
+
+        let defense = Math.round((0.5 * defVIT) + (1.3 * defSPE));
+        //console.log(defense);
+
+        return defense;
+
+    } else if (race == 'Dwarf') {
+
+        let defVIT = arraySTATS[2];
+        let defSTR = arraySTATS[0];
+
+        let defense = Math.round((1.1 * defVIT) + (1.1 * defSTR));
+        //console.log(defense);
+
+        return defense; 
+
+    } else if (race == 'Mage') {
+
+        let defMAG = arraySTATS[4];
+        let defSPE = arraySTATS[1];
+
+        let defense = Math.round((0.8 * defMAG) + (0.3 * defSPE));
+        //console.log(defense);
+
+        return defense;
+
+    } else {
+
+        console.log('La defensa son los padres');
+
+    }
+}
+
+
+// Recogemos los retuns anteriores
+
+function stats(firstRace,arraySTATS) {
+
+    let stat1 = getDamages(firstRace);
+    let stat2 = getDefense(firstRace);
+
+    let Stats = [stat1,stat2];
+
+    //console.log(Stats);
+    console.log(race,'\n',"- Ataque:",Stats[0],'\n',"- Defensa:",Stats[1]);
+    console.log("Btw, los otros botones no van porque los console.log no estan habilitados no pienses que esto va mal porque va increible");
+
+}
+
+
+
+</script>   
+
+</body>
+</html>

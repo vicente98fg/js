@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+
+
+<script type="text/javascript">
+
+var tiempo = prompt("Introduzca tiempo");
+var tarifa = 10;
+
+//Calculo a partir de los 180 minutos
+
+var i = 0;
+
+if (tiempo >= 180) {
+    for (i=180; i < tiempo; i++) {
+        var tarifa = tarifa + 0.10;
+    }
+}
+
+//Calculo a partir de los 240 minutos 
+
+var j = 0;
+
+if (tiempo >= 240) {
+    for (j=240; j < tiempo; j++) {
+        var tarifa = tarifa + 0.10;
+    }
+}
+
+var tarifaFinal = Math.round(tarifa * 100) / 100;
+document.write(tarifaFinal);
+
+</script>
+
+
+</body>
+</html>
