@@ -9,10 +9,12 @@
 <body>
 
 <button onclick="diceThrow(6)">Tira un D6</button> <br>
-<button onclick="createRPGCharacter(race)">Generar el array de stats</button> <br>
-<button onclick="getDamages(createRPGCharacter(race))">Damages</button>
-<button onclick="getDefense(createRPGCharacter(race))">Defensa</button>
-<button onclick="stats(createRPGCharacter(race))">Juntar stats</button>
+<button onclick="createRPGCharacter(firstRace)">Generar el array de stats</button> <br>
+<button onclick="getDamages(createRPGCharacter(firstRace))">Damages</button>
+<button onclick="getDefense(createRPGCharacter(firstRace))">Defensa</button>
+<button onclick="stats1(createRPGCharacter(firstRace))">Juntar stats</button>
+<button onclick="stats2(createRPGCharacter(secondRace))">Juntar stats 2</button> <br>
+<button onclick="simulateBattle(createRPGCharacter(firstRace,secondRace))">Batalla</button>
 
 <script type="text/javascript">
 
@@ -29,11 +31,12 @@ function diceThrow(dado) {
 
 //Seleccion de raza y atributos
 
-var race = prompt("Introduzca raza: Human, Elven, Dwarf, Mage");
+var firstRace = prompt("Introduzca raza del primer jugador: Human, Elven, Dwarf, Mage");
+var secondRace = prompt("Introduzca raza del segundo jugador: Human, Elven, Dwarf, Mage");
 
-function createRPGCharacter(race) {
+function createRPGCharacter(firstRace) {
 
-    if (race == 'Human') {
+    if (firstRace == 'Human' || secondRace == 'Human') {
 
         var randSTR = 8 + diceThrow(6) + diceThrow(6);
         var randSPE = 4 + diceThrow(6);
@@ -46,7 +49,7 @@ function createRPGCharacter(race) {
 
         return arraySTATS;
 
-    } else if (race == 'Elven') {
+    } else if (firstRace == 'Elven' || secondRace == 'Elven') {
 
         var randSTR = 6 + diceThrow(6) + diceThrow(6);
         var randSPE = diceThrow(20);
@@ -59,7 +62,7 @@ function createRPGCharacter(race) {
 
         return arraySTATS;
 
-    } else if (race == 'Dwarf') {
+    } else if (firstRace == 'Dwarf' || secondRace == 'Dwarf') {
 
         var randSTR = 10 + diceThrow(10);
         var randSPE = diceThrow(8) + diceThrow(8);;
@@ -72,7 +75,7 @@ function createRPGCharacter(race) {
 
         return arraySTATS;
 
-    } else if (race == 'Mage') {
+    } else if (firstRace == 'Mage' || secondRace == 'Mage') {
 
         var randSTR = diceThrow(6);
         var randSPE = diceThrow(20); 
@@ -97,7 +100,7 @@ function createRPGCharacter(race) {
 
 function getDamages(arraySTATS) {
 
-    if (race == 'Human') {
+    if (firstRace == 'Human' || secondRace == 'Human') {
 
         let damSTR = arraySTATS[0];
         let damDEX = arraySTATS[3];
@@ -107,7 +110,7 @@ function getDamages(arraySTATS) {
 
         return damages;
 
-    } else if (race == 'Elven') {
+    } else if (firstRace == 'Elven' || secondRace == 'Elven') {
 
         let damDEX = arraySTATS[3];
         let damMAG = arraySTATS[4];
@@ -117,7 +120,7 @@ function getDamages(arraySTATS) {
 
         return damages;
 
-    } else if (race == 'Dwarf') {
+    } else if (firstRace == 'Dwarf' || secondRace == 'Dwarf') {
 
         let damSTR = arraySTATS[0];
 
@@ -126,7 +129,7 @@ function getDamages(arraySTATS) {
 
         return damages;
 
-    } else if (race == 'Mage') {
+    } else if (firstRace == 'Mage' || secondRace == 'Mage') {
 
         let damDEX = arraySTATS[3];
         let damMAG = arraySTATS[4];
@@ -148,7 +151,7 @@ function getDamages(arraySTATS) {
 
 function getDefense(arraySTATS) {
 
-    if (race == 'Human') {
+    if (firstRace == 'Human' || secondRace == 'Human') {
 
         let defVIT = arraySTATS[2];
         let defSPE = arraySTATS[1];
@@ -158,7 +161,7 @@ function getDefense(arraySTATS) {
 
         return defense;
 
-    } else if (race == 'Elven') {
+    } else if (firstRace == 'Elven' || secondRace == 'Elven') {
 
         let defVIT = arraySTATS[2];
         let defSPE = arraySTATS[1];
@@ -168,7 +171,7 @@ function getDefense(arraySTATS) {
 
         return defense;
 
-    } else if (race == 'Dwarf') {
+    } else if (firstRace == 'Dwarf' || secondRace == 'Dwarf') {
 
         let defVIT = arraySTATS[2];
         let defSTR = arraySTATS[0];
@@ -178,7 +181,7 @@ function getDefense(arraySTATS) {
 
         return defense; 
 
-    } else if (race == 'Mage') {
+    } else if (firstRace == 'Mage' || secondRace == 'Mage') {
 
         let defMAG = arraySTATS[4];
         let defSPE = arraySTATS[1];
@@ -196,20 +199,152 @@ function getDefense(arraySTATS) {
 }
 
 
-// Recogemos los retuns anteriores
+function getHealthPoints(arraySTATS) {
 
-function stats(firstRace,arraySTATS) {
+if (firstRace == 'Human' || secondRace == 'Human') {
 
-    let stat1 = getDamages(firstRace);
-    let stat2 = getDefense(firstRace);
+    let heaSTR = arraySTATS[0];
+    let heaVIT = arraySTATS[2];
 
-    let Stats = [stat1,stat2];
+    let health = heaSTR + heaVIT + 10;
+    //console.log(defense);
 
-    //console.log(Stats);
-    console.log(race,'\n',"- Ataque:",Stats[0],'\n',"- Defensa:",Stats[1]);
-    console.log("Btw, los otros botones no van porque los console.log no estan habilitados no pienses que esto va mal porque va increible");
+    return health;
+
+} else if (firstRace == 'Elven' || secondRace == 'Elven') {
+
+    let heaSTR = arraySTATS[0];
+    let heaDEX = arraySTATS[3];
+
+    let health = heaSTR + heaDEX + 5;
+    //console.log(defense);
+
+    return health;
+
+} else if (firstRace == 'Dwarf' || secondRace == 'Dwarf') {
+
+    let heaSTR = arraySTATS[0];
+    let heaVIT = arraySTATS[2];
+
+    let health = heaSTR + heaDEX + 15;
+    //console.log(defense);
+
+    return health; 
+
+} else if (firstRace == 'Mage' || secondRace == 'Mage') {
+
+    let heaMAG = arraySTATS[4];
+    let heaVIT = arraySTATS[2];
+
+    let health = heaMAG + heaVIT + 3;
+    //console.log(defense);
+
+    return health;
+
+} else {
+
+    console.log('No tienes vida, literal');
 
 }
+}
+
+
+function simulateBattle(arraySTATS,race) {
+
+    // Primer personaje
+    let stat1 = getDamages(arraySTATS);
+    let stat2 = getDefense(arraySTATS);
+    let stat3 = getHealthPoints(arraySTATS);
+    let stat4 = arraySTATS[1];
+
+    let firstCharacterStats = [stat1,stat2,stat3,stat4];
+
+    console.log(firstRace,'\n',"- Ataque:",firstCharacterStats[0],'\n',"- Defensa:",firstCharacterStats[1],'\n',"- Puntos de Vida:",firstCharacterStats[2],'\n',"- Velocidad:",firstCharacterStats[3]);
+
+    // Segundo personaje
+    var secondCharacter = createRPGCharacter(race);
+
+    let stat1B = getDamages(secondCharacter);
+    let stat2B = getDefense(secondCharacter);
+    let stat3B = getHealthPoints(secondCharacter);
+    let stat4B = secondCharacter[1];
+
+    let secondCharacterStats = [stat1B,stat2B,stat3B,stat4B];
+
+    console.log(secondRace,'\n',"- Ataque:",secondCharacterStats[0],'\n',"- Defensa:",secondCharacterStats[1],'\n',"- Puntos de Vida:",secondCharacterStats[2],'\n',"- Velocidad:",secondCharacterStats[3]);
+
+    // Combate
+    let firstVida = firstCharacterStats[2];
+    let secondVida = secondCharacterStats[2];
+
+    if (firstCharacterStats[3] > secondCharacterStats[3]) {
+        do {
+            firstDamage = firstCharacterStats[0] - secondCharacterStats[1];
+            secondVida = secondVida - firstDamage;
+
+            if (secondVida > 0) {
+                console.log("El segundo jugador ataca (",secondDamage,"de daño )");
+                console.log("El segundo jugador posee",secondVida,"de vida restante");
+            } else {
+                console.log("El segundo jugador ataca (",secondDamage,"de daño )");
+                console.log("La vida del segundo jugador ha llegado a 0. \nEl primer jugador gana.");
+                break;
+            }
+
+            secondDamage = secondCharacterStats[0] - firstCharacterStats[1];
+            firstVida = firstVida - secondDamage;
+
+            if (firstVida > 0) {
+                console.log("El primer jugador ataca (",firstDamage,"de daño )");
+                console.log("El primer jugador posee",firstVida,"de vida restante");
+            } else {
+                console.log("El primer jugador ataca (",firstDamage,"de daño )");
+                console.log("La vida del primer jugador ha llegado a 0. \nEl segundo jugador gana.");
+                break;
+            }
+        }
+        while (firstVida > 0 || secondVida > 0);
+        
+    } else {
+        do {
+            secondDamage = secondCharacterStats[0] - firstCharacterStats[1];
+            firstVida = firstVida - secondDamage;
+
+            if (firstVida > 0) {
+                console.log("El segundo jugador ataca (",secondDamage,"de daño )");
+                console.log("El primer jugador posee",firstVida,"de vida restante");
+            } else {
+                console.log("El segundo jugador ataca (",secondDamage,"de daño )");
+                console.log("La vida del primer jugador ha llegado a 0. \nEl segundo jugador gana.");
+                break;
+            }
+
+            firstDamage = firstCharacterStats[0] - secondCharacterStats[1];
+            secondVida = secondVida - firstDamage;
+
+            if (secondVida > 0) {
+                console.log("El primer jugador ataca (",firstDamage,"de daño )");
+                console.log("El segundo jugador posee",secondVida,"de vida restante");
+            } else {
+                console.log("El primer jugador ataca (",firstDamage,"de daño )");
+                console.log("La vida del segundo jugador ha llegado a 0. \nEl primer jugador gana.");
+                break;
+            }
+        }
+        while (firstVida > 0 || secondVida > 0);
+
+    }
+
+    
+
+    
+
+
+
+
+}
+
+
 
 
 

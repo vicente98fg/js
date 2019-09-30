@@ -1,0 +1,29 @@
+// Recogemos los retuns anteriores
+
+function stats1(race) {
+
+    let stat1 = getDamages(race);
+    let stat2 = getDefense(race);
+    let stat3 = getHealthPoints(race);
+
+    let firstCharacterStats = [stat1,stat2,stat3];
+
+    //console.log(Stats);
+    console.log(firstRace,'\n',"- Ataque:",firstCharacterStats[0],'\n',"- Defensa:",firstCharacterStats[1],'\n',"- Puntos de Vida:",firstCharacterStats[2]);
+    return firstCharacterStats;
+
+}
+
+function stats2(race,arraySTATS) {
+
+    let stat1 = getDamages(race);
+    let stat2 = getDefense(race);
+    let stat3 = getHealthPoints(race);
+
+    let secondCharacterStats = [stat1,stat2,stat3];
+
+    //console.log(Stats);
+    console.log(secondRace,'\n',"- Ataque:",secondCharacterStats[0],'\n',"- Defensa:",secondCharacterStats[1],'\n',"- Puntos de Vida:",secondCharacterStats[2]);
+    return secondCharacterStats;
+
+}
